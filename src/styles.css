@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body
+{
+  height: 100%;
+  background-image: url("src/app/images/SfondoAmministratore.jpeg");
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  min-width: 100%;
+  margin: 0;
+  right: 0;
+  top: 0;
+}
+
+body
+{
+  margin: 0;
+  padding: 0;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 12pt;
+  font-weight: 200;
+  color: #FFF;
+}
+
+
+h1, h2, h3
+{
+  margin: 0;
+  padding: 0;
+}
+
+p, ol, ul
+{
+  margin-top: 0;
+}
+
+ol, ul
+{
+  padding: 0;
+  list-style: none;
+}
+
+p
+{
+  line-height: 180%;
+}

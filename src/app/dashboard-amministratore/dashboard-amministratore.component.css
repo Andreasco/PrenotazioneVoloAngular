@@ -1,0 +1,26 @@
+div.tabellaAeroporti{
+  background: #68bdff;
+  position: absolute;
+  top: 150px;
+  border-radius: 10px;
+  left: 20px;
+  text-align: center;
+}
+
+div.aggiuntaAeroporto{
+  text-align: center;
+}
+
+form{
+  position: relative;
+  top: 5px;
+}
+
+div.tabellaTratte{
+  background: #68bdff;
+  position: absolute;
+  top: 150px;
+  border-radius: 10px;
+  left: 600px;
+  text-align: center;
+}
