@@ -1,0 +1,13 @@
+<html>
+<body>
+<div class="log-form">
+  <h1>Ciao utente! Fai il login o registrati</h1>
+  <form>
+    <input type="text" name="username" required [(ngModel)]="utenteInput.username" placeholder="username" /><br>
+    <input type="password" name="password" required [(ngModel)]="utenteInput.password" placeholder="password" /><br>
+    <button class="btn" (click) = "loginUtente()">Login</button>
+    <button class="btn" (click)= "registrazioneUtente()">Registrati</button>
+  </form>
+</div>
+</body>
+</html>

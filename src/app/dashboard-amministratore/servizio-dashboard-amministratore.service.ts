@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Aeroporto} from './aeroporto';
 import {Tratta} from './tratta';
+import {Volo} from './volo';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,6 +19,7 @@ export class ServizioDashboardAmministratoreService {
   private urlAeroporto = 'http://localhost:8080/PrenotazioneVolo/rest/aeroportos';
   private urlAmministratore = 'http://localhost:8080/PrenotazioneVolo/rest/amministratores';
   private urlTratta = 'http://localhost:8080/PrenotazioneVolo/rest/trattas';
+  private urlVolo = 'http://localhost:8080/PrenotazioneVolo/rest/volos';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -42,5 +44,25 @@ export class ServizioDashboardAmministratoreService {
   public getAmministratore() {
     const username = this.router.url.split('/')[2].toString();
     return this.http.get<Amministratore>(this.urlAmministratore + '/' + username);
+  }
+
+  public findVoliByTratta(aP: string, aD: string) {
+    return this.http.get<Volo[]>(this.urlVolo + '/' + aP + '-' + aD);
+  }
+
+  public cancellaAeroporto(nome: string){
+    this.http.delete(this.urlAeroporto + '/' + nome).subscribe(() => {});
+  }
+
+  public cancellaTratta(aP: string, aD: string) {
+    this.http.delete(this.urlTratta + '/' + aP + '-' + aD).subscribe(() => {});
+  }
+
+  public addVolo(volo: Volo) {
+    this.http.post(this.urlVolo, volo, httpOptions).subscribe(() => {});
+  }
+
+  public cancellaVolo(id: number) {
+    this.http.delete(this.urlVolo + '/' + id).subscribe(() => {});
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Amministratore} from './amministratore';
-import {AutenticazioneService} from './autenticazione.service';
+import {AutenticazioneAmministratoreService} from './autenticazione-amministratore.service';
 
 @Component({
   selector: 'app-login-amministratore',
@@ -10,13 +10,13 @@ import {AutenticazioneService} from './autenticazione.service';
 export class LoginAmministratoreComponent implements OnInit {
 
   private amministratoreLoggato: Amministratore;
-  private amministratori: Amministratore[];
+  // private amministratori: Amministratore[];
   private ammInput: Amministratore = new Amministratore();
 
-  constructor(private autenticazione: AutenticazioneService) { }
+  constructor(private autenticazione: AutenticazioneAmministratoreService) { }
 
   ngOnInit() {
-    this.autenticazione.listAll().subscribe(admins => this.amministratori = admins);
+    // this.autenticazione.listAll().subscribe(admins => this.amministratori = admins);
   }
 
   public registrazioneAdmin() {
@@ -29,15 +29,15 @@ export class LoginAmministratoreComponent implements OnInit {
   public loginAdmin() {
     console.log(this.ammInput.username, this.ammInput.password);
     this.autenticazione.verify(this.ammInput.username, this.ammInput.password)
-      .subscribe(utente => {
-        if (utente) {
+      .subscribe(amministratore => {
+        if (amministratore) {
           console.log('verificato');
           this.amministratoreLoggato = new Amministratore();
           this.amministratoreLoggato.username = this.ammInput.username;
           this.amministratoreLoggato.password = this.ammInput.password;
           this.autenticazione.go(this.amministratoreLoggato);
         } else {
-          console.log('Questo amministratore non esiste');
+          alert('Questo amministratore non esiste');
         }
       });
   }

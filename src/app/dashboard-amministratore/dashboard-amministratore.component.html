@@ -7,49 +7,62 @@
 
 <h1 style="text-align: center; font-size: 300%">Dashboard di {{amministratore.username}}</h1>
 
-<div class="tabellaAeroporti">
-  <form>
-    <h1>Lista aeroporti</h1>
-    <input type="text" name="nome" required [(ngModel)]="aerInput.nome" placeholder="nome" />
-    <input type="text" name="citta" required [(ngModel)]="aerInput.citta" placeholder="citta" />
-    <button class="btn" style="color: black" (click) = "aggiungiAeroporto()">Aggiungi</button>
-  </form>
-  <br>
-  <br>
-<table class="pure-table pure-table-bordered">
-  <thead>
-  <tr>
-    <th>Nome</th>
-    <th>Città</th>
-  </tr>
-  </thead>
+<div class="tabellaAeroportiVoli">
+  <div class="tabellaAeroporti">
+    <form>
+      <h1>Lista aeroporti</h1>
+      <input type="text" name="nome" required [(ngModel)]="aerInput.nome" placeholder="nome" style="color: #3f0900"/>
+      <input type="text" name="citta" required [(ngModel)]="aerInput.citta" placeholder="citta" style="color: #3f0900"/>
+      <button class="btn" style="color: black" (click) = "aggiungiAeroporto()">Aggiungi</button>
+    </form>
+    <br>
+    <br>
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Città</th>
+    </tr>
+    </thead>
 
-  <tbody>
-  <tr *ngFor="let aeroporto of aeroporti">
-    <td>{{aeroporto.nome}}</td>
-    <td>{{aeroporto.citta}}</td>
-  </tr>
+    <tbody>
+    <tr class="cellaAeroporti" *ngFor="let aeroporto of aeroporti" (click)="aeroportoSelezionato = aeroporto">
+      <td>{{aeroporto.nome}}</td>
+      <td>{{aeroporto.citta}}</td>
+    </tr>
+    </tbody>
+  </table>
+    <div class="cancellaAeroporti">
+      <h3>Aeroporto selezionato: {{aeroportoSelezionato.nome}}</h3><br>
+      <button class="bottoneCancellaAeroporti" style="color: black" [disabled]="aeroportoSelezionato.nome == null" (click) = "cancellaAeroporto()">Cancella</button>
+    </div>
 
-  <tbody>
-  <tr>
-    <td>ok</td>
-    <td>ok</td>
-  </tr>
+  </div>
 
-  </tbody>
-</table>
+  <div class="aggiuntaVoli">
+    <h1>Aggiungi Volo</h1>
+    <form>
+      <h3>Tratta selezionata: {{trattaSelezionata.aeroportoPartenza.nome + '-' + trattaSelezionata.aeroportoDestinazione.nome}}</h3><br>
+      <h3>Data partenza</h3><dp-date-picker [config]="config" name="dataPartenza" class="datepicker" [(ngModel)]="dataPartenzaVolo" mode="daytime"></dp-date-picker><br>
+      <h3>Data arrivo</h3><dp-date-picker [config]="config" name="dataPartenza" class="datepicker" [(ngModel)]="dataArrivoVolo" mode="daytime"></dp-date-picker><br><br>
+      <input type="text" dir="rtl" name="prezzo" required [(ngModel)]="voloInput.prezzo" placeholder="prezzo" style="color: #3f0900"/><p style="color: #3f0900; display: inline">€</p><br>
+      <button class="btn" style="color: black" [disabled]="trattaSelezionata == null" (click) = "aggiungiVolo()">Aggiungi</button>
+    </form>
+  </div>
+
 </div>
 
+<div class="tabellaTratteVoli">
 <div class="tabellaTratte">
   <form>
     <h1>Lista tratte</h1>
     <label>Aeroporto di partenza</label>
-    <select [(ngModel)]="aerPartInput" style="margin: 5px">
+    <select name="aerPartenza" [(ngModel)]="aerPartInput" style="margin: 5px">
       <option *ngFor="let aeroporto of aeroporti" [ngValue]="aeroporto">{{aeroporto.nome}} </option>
     </select>
     <label>Aeroporto di destinazione</label>
-    <select [(ngModel)]="aerDestInput" style="margin: 5px">
-      <option *ngFor="let aeroporto of aeroporti" [ngValue]="aeroporto">{{aeroporto.nome}} </option>
+    <select name="aerDestinazione" [(ngModel)]="aerDestInput" style="margin: 5px">
+      <option *ngFor="let aeroporto of aeroporti" [ngValue]="aeroporto">{{aeroporto.nome}}</option>
     </select>
     <button class="btn" style="color: black" (click) = "aggiungiTratta()">Aggiungi</button>
   </form>
@@ -64,19 +77,50 @@
     </thead>
 
     <tbody>
-    <tr *ngFor="let tratta of tratte">
+    <tr class="cellaTratte" *ngFor="let tratta of tratte"  (click)="getVoliByTratta(tratta)">
       <td>{{tratta.aeroportoPartenza.nome}}</td>
       <td>{{tratta.aeroportoDestinazione.nome}}</td>
     </tr>
-
-    <tbody>
-    <tr>
-      <td>ok</td>
-      <td>ok</td>
-    </tr>
-
     </tbody>
   </table>
+
+  <div class="cancellaTratta">
+    <h3>Tratta selezionata: {{trattaSelezionata.aeroportoPartenza.nome + '-' + trattaSelezionata.aeroportoDestinazione.nome}}</h3><br>
+    <button class="bottoneCancellaTratta" style="color: black" (click) = "cancellaTratta()">Cancella</button>
+  </div>
+
+</div>
+<br>
+<br>
+<div class="tabellaVoli">
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ora partenza</th>
+      <th>Ora arrivo</th>
+      <th>Durata</th>
+      <th>Prezzo</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="cellaVoli" *ngFor="let volo of voliByTratta" (click)="selezionaVolo(volo)">
+      <td>{{volo.id}}</td>
+      <td>{{convertiTimestamp(volo.dataPartenza)}}</td>
+      <td>{{convertiTimestamp(volo.dataArrivo)}}</td>
+      <td>{{volo.durata}}</td>
+      <td>{{volo.prezzo}}€</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="cancellaVolo">
+    <h3>ID volo selezionato: {{voloSelezionato.id}}</h3><br>
+    <button class="bottoneCancellaVolo" style="color: black" [disabled]="voloSelezionato == null" (click) = "cancellaVolo()">Cancella</button>
+  </div>
+
+</div>
 </div>
 
 </body>

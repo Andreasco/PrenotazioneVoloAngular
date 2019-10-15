@@ -1,0 +1,92 @@
+<html>
+<head>
+  <title>Dashboard amministratore</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 style="text-align: center; font-size: 300%">Dashboard di {{utente.username}}, prenota un volo!</h1>
+
+<div class="sceltaTratta">
+  <form>
+    <h1>Scegli la tua tratta</h1>
+    <input type="text" name="partenza" required [(ngModel)]="aeroportoRicerca" placeholder="Partenza" style="color: #3f0900; margin: 5px"/>
+    <button class="btn" style="color: black" (click) = "cercaTratte()">Cerca</button>
+  </form>
+
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>Partenza</th>
+      <th>Destinazione</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="cellaTratte" *ngFor="let tratta of tratteAttuali" (click)="trattaSelezionata = tratta">
+      <td>{{tratta.aeroportoPartenza.nome}}</td>
+      <td>{{tratta.aeroportoDestinazione.nome}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="dettaglio" *ngIf="showDettaglio">
+
+  <h1>Dettaglio selezione</h1>
+
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>Aeroporto partenza</th>
+      <th>Città partenza</th>
+      <th>Aeroporto destinazione</th>
+      <th>Città destinazione</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="cellaAeroportiSelezionati">
+      <td>{{trattaSelezionata.aeroportoPartenza.nome}}</td>
+      <td>{{trattaSelezionata.aeroportoPartenza.citta}}</td>
+      <td>{{trattaSelezionata.aeroportoDestinazione.nome}}</td>
+      <td>{{trattaSelezionata.aeroportoDestinazione.citta}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h1>Voli disponibili</h1>
+
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Ora partenza</th>
+      <th>Ora arrivo</th>
+      <th>Durata</th>
+      <th>Prezzo</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="cellaVoliDisponibili" *ngFor="let volo of voliByTratta" (click)="selezionaVolo(volo)">
+      <td>{{volo.id}}</td>
+      <td>{{convertiTimestamp(volo.dataPartenza)}}</td>
+      <td>{{convertiTimestamp(volo.dataArrivo)}}</td>
+      <td>{{volo.durata}}</td>
+      <td>{{volo.prezzo}}€</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h2>ID volo selezionato: {{voloSelezionato.id}}</h2>
+  <h2>Quanti posti vuoi prenotare?</h2>
+  <select name="nPostiScelti" [(ngModel)]="nPostiScelti" style="margin: 5px">
+    <option *ngFor="let number of postiDisponibili" [ngValue]="number">{{number}} </option>
+  </select>
+  <button class="btn" [disabled]="nPostiScelti == -1" style="color: black" (click) = "prenota()">Prenota</button>
+
+</div>
+
+</body>
+</html>

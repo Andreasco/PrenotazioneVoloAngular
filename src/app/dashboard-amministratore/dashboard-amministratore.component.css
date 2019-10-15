@@ -1,10 +1,16 @@
-div.tabellaAeroporti{
-  background: #68bdff;
+html {
+  overflow-y: scroll;
+}
+
+body{
+  position: absolute;
+}
+
+div.tabellaAeroportiVoli{
   position: absolute;
   top: 150px;
   border-radius: 10px;
   left: 20px;
-  text-align: center;
 }
 
 div.aggiuntaAeroporto{
@@ -16,11 +22,27 @@ form{
   top: 5px;
 }
 
-div.tabellaTratte{
-  background: #68bdff;
+div.tabellaTratteVoli{
   position: absolute;
   top: 150px;
   border-radius: 10px;
   left: 600px;
   text-align: center;
 }
+
+div.tabellaTratte, div.tabellaVoli, div.tabellaAeroporti, div.aggiuntaVoli{
+  background: #68bdff;
+}
+
+div.tabellaVoli{
+  width: 600px;
+}
+
+tr.cellaTratte:hover,tr.cellaAeroporti:hover, tr.cellaVoli:hover{
+  background: #1dff31;
+}
+
+.datepicker{
+  color: #3f0900;
+}
+

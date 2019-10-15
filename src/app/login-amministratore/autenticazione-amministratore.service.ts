@@ -12,7 +12,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class AutenticazioneService {
+export class AutenticazioneAmministratoreService {
 
   private urlLogin = 'http://localhost:8080/PrenotazioneVolo/rest/amministratores';
   private amministratore: Amministratore;

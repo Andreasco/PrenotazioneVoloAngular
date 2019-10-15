@@ -1,0 +1,26 @@
+html {
+  overflow-y: scroll;
+}
+
+body{
+  position: absolute;
+}
+
+div.sceltaTratta{
+  position: absolute;
+  top: 150px;
+  border-radius: 10px;
+  left: 20px;
+}
+
+div.sceltaTratta, div.dettaglio{
+  background: #68bdff;
+}
+
+div.dettaglio{
+  position: absolute;
+  top: 150px;
+  border-radius: 10px;
+  left: 600px;
+  text-align: center;
+}
