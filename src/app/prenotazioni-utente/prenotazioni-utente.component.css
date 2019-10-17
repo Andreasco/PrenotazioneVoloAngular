@@ -1,0 +1,17 @@
+html {
+  overflow-y: scroll;
+}
+
+body{
+  position: absolute;
+}
+
+tr.cellaPrenotazioni:hover{
+  background: #1dff31;
+}
+
+div.listaPrenotazioni{
+  background: #68bdff;
+  border-radius: 8px;
+  margin: 5px;
+}

@@ -6,6 +6,7 @@ import {DashboardAmministratoreComponent} from './dashboard-amministratore/dashb
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {DashboardUtenteComponent} from './dashboard-utente/dashboard-utente.component';
 import {LoginUtenteComponent} from './login-utente/login-utente.component';
+import {PrenotazioniUtenteComponent} from './prenotazioni-utente/prenotazioni-utente.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path : 'utente' , component : LoginUtenteComponent},
   { path : 'amministratore/:username' , component : DashboardAmministratoreComponent},
   { path : 'utente/:username' , component : DashboardUtenteComponent},
+  { path : 'utente/:username/prenotazioni' , component : PrenotazioniUtenteComponent},
   { path : '' , component : HomeComponent},
   { path : '**', component : PageNotFoundComponent}
 ];

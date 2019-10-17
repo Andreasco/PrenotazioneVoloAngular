@@ -1,11 +1,12 @@
 <html>
 <head>
-  <title>Dashboard amministratore</title>
+  <title>Dashboard utente</title>
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
 </head>
 <body>
 
-<h1 style="text-align: center; font-size: 300%">Dashboard di {{utente.username}}, prenota un volo!</h1>
+<h1 style="text-align: center; font-size: 300%">Dashboard utente, prenota un volo!</h1>
+<button class="goPrenotazioni" style="color: black" (click)="goPrenotazioni()">Vai alle tue prenotazioni</button>
 
 <div class="sceltaTratta">
   <form>
@@ -23,7 +24,7 @@
     </thead>
 
     <tbody>
-    <tr class="cellaTratte" *ngFor="let tratta of tratteAttuali" (click)="trattaSelezionata = tratta">
+    <tr class="cellaTratte" *ngFor="let tratta of tratteAttuali" (click)="selezionaTratta(tratta)">
       <td>{{tratta.aeroportoPartenza.nome}}</td>
       <td>{{tratta.aeroportoDestinazione.nome}}</td>
     </tr>
@@ -31,7 +32,7 @@
   </table>
 </div>
 
-<div class="dettaglio" *ngIf="showDettaglio">
+<div class="dettaglio">
 
   <h1>Dettaglio selezione</h1>
 
@@ -82,7 +83,8 @@
   <h2>ID volo selezionato: {{voloSelezionato.id}}</h2>
   <h2>Quanti posti vuoi prenotare?</h2>
   <select name="nPostiScelti" [(ngModel)]="nPostiScelti" style="margin: 5px">
-    <option *ngFor="let number of postiDisponibili" [ngValue]="number">{{number}} </option>
+    <option></option>
+    <option *ngFor="let number of postiDisponibili" [ngValue]="number">{{number}}</option>
   </select>
   <button class="btn" [disabled]="nPostiScelti == -1" style="color: black" (click) = "prenota()">Prenota</button>
 

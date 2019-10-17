@@ -58,10 +58,12 @@
     <h1>Lista tratte</h1>
     <label>Aeroporto di partenza</label>
     <select name="aerPartenza" [(ngModel)]="aerPartInput" style="margin: 5px">
+      <option></option>
       <option *ngFor="let aeroporto of aeroporti" [ngValue]="aeroporto">{{aeroporto.nome}} </option>
     </select>
     <label>Aeroporto di destinazione</label>
     <select name="aerDestinazione" [(ngModel)]="aerDestInput" style="margin: 5px">
+      <option></option>
       <option *ngFor="let aeroporto of aeroporti" [ngValue]="aeroporto">{{aeroporto.nome}}</option>
     </select>
     <button class="btn" style="color: black" (click) = "aggiungiTratta()">Aggiungi</button>

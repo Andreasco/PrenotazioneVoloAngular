@@ -50,7 +50,7 @@ export class ServizioDashboardAmministratoreService {
     return this.http.get<Volo[]>(this.urlVolo + '/' + aP + '-' + aD);
   }
 
-  public cancellaAeroporto(nome: string){
+  public cancellaAeroporto(nome: string) {
     this.http.delete(this.urlAeroporto + '/' + nome).subscribe(() => {});
   }
 

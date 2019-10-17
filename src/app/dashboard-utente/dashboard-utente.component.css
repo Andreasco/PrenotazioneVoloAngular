@@ -24,3 +24,14 @@ div.dettaglio{
   left: 600px;
   text-align: center;
 }
+
+tr.cellaTratte:hover, tr.cellaVoliDisponibili:hover{
+  background: #1dff31;
+}
+
+button.goPrenotazioni{
+  position: absolute;
+  left: 600px;
+  font-size: 150%;
+  top: 90px;
+}

@@ -1,0 +1,52 @@
+<html>
+<head>
+  <title>Dashboard utente</title>
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+</head>
+<body>
+
+<h1 style="text-align: center; font-size: 300%">Prenotazioni di {{utente}}</h1>
+<h3 style="text-align: center; font-size: 200%">Qui puoi gestire le tue prenotazioni. Ricordati di presentare il codice al check-in</h3>
+
+<div class="listaPrenotazioni">
+  <table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+      <th>ID prenotazione</th>
+      <th>Aeroporto partenza</th>
+      <th>Città partenza</th>
+      <th>Aeroporto destinazione</th>
+      <th>Città destinazione</th>
+      <th>Data partenza</th>
+      <th>Data arrivo</th>
+      <th>Durata</th>
+      <th>Numero posti</th>
+      <th>Prezzo totale</th>
+      <th>Codice prenotazione</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="cellaPrenotazioni" *ngFor="let prenotazione of prenotazioni" (click)="prenotazioneSelezionata = prenotazione">
+      <td>{{prenotazione.id}}</td>
+      <td>{{prenotazione.volo.tratta.aeroportoPartenza.nome}}</td>
+      <td>{{prenotazione.volo.tratta.aeroportoPartenza.citta}}</td>
+      <td>{{prenotazione.volo.tratta.aeroportoDestinazione.nome}}</td>
+      <td>{{prenotazione.volo.tratta.aeroportoDestinazione.citta}}</td>
+      <td>{{convertiTimestamp(prenotazione.volo.dataPartenza)}}</td>
+      <td>{{convertiTimestamp(prenotazione.volo.dataArrivo)}}</td>
+      <td>{{prenotazione.volo.durata}}</td>
+      <td>{{prenotazione.numeroPosti}}</td>
+      <td>{{prenotazione.prezzoPrenotazione}}</td>
+      <td>{{prenotazione.codicePrenotazione}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="cancellaPrenotazione">
+    <h3>ID prenotazione selezionata: {{prenotazioneSelezionata.id}}</h3><br>
+    <button class="bottoneCancellaPrenotazione" style="color: black" (click) = "cancellaPrenotazione()">Cancella</button>
+  </div>
+</div>
+
+

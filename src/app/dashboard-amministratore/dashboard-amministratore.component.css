@@ -6,6 +6,10 @@ body{
   position: absolute;
 }
 
+div{
+  border-radius: 5px;
+}
+
 div.tabellaAeroportiVoli{
   position: absolute;
   top: 150px;
