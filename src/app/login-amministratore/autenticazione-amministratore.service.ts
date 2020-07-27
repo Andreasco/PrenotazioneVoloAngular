@@ -37,8 +37,4 @@ export class AutenticazioneAmministratoreService {
     console.log(typeof amministratore.password);*/
     this.router.navigate([ '/amministratore', amministratore.username]);
   }
-
-  public listAll(): Observable<Amministratore[]> {
-    return this.http.get<Amministratore[]>(this.urlLogin);
-  }
 }

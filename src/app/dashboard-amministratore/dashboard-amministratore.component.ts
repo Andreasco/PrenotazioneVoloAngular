@@ -83,7 +83,6 @@ export class DashboardAmministratoreComponent implements OnInit {
     }
   }
 
-  // non funziona l'aggiunta
   public aggiungiVolo() {
     const volo = new Volo();
     volo.prezzo = this.voloInput.prezzo;
